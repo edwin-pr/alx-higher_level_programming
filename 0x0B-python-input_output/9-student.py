@@ -1,21 +1,22 @@
 #!/usr/bin/python3
+"""Defines a class Student."""
 
-def class_to_json(obj):
-    """
-    Convert an object of a custom class to a JSON-serializable dictionary.
 
-    Args:
-        obj: An instance of a custom class.
+class Student:
+    """Represent a student."""
 
-    Returns:
-        dict: A dictionary representation of the object.
-    """
-    # Create an empty dictionary to store the object's attributes
-    json_data = {}
+    def __init__(self, first_name, last_name, age):
+        """Initialize a new Student.
 
-    # Loop through the object's attributes and serialize them
-    for attr_name, attr_value in obj.__dict__.items():
-        if isinstance(attr_value, (list, dict, str, int, bool)):
-            json_data[attr_name] = attr_value
+        Args:
+            first_name (str): The first name of the student.
+            last_name (str): The last name of the student.
+            age (int): The age of the student.
+        """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
-    return json_data
+    def to_json(self):
+        """Get a dictionary representation of the Student."""
+        return self.__dict__
