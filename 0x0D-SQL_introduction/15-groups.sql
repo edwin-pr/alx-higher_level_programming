@@ -1,0 +1,15 @@
+-- This script that lists the number of records with the same score in
+-- the table second_table of the database hbtn_0c_0 in your MySQL server.
+-- The result should display:
+-- the score
+-- the number of records for this score with the label number
+-- The list should be sorted by the number of records (descending)
+-- The database name will be passed as an argument to the mysql command
+-- Use the specified database (passed as an argument)
+-- USE `your_database_name`;
+
+-- List the number of records with the same score, sorted by the number of records (descending)
+SELECT `score`, COUNT(*) AS `number`
+FROM `second_table`
+GROUP BY `score`
+ORDER BY `number` DESC;
