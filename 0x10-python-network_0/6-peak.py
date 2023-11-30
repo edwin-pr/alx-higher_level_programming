@@ -1,16 +1,37 @@
 #!/usr/bin/python3
+"""Find peak in list of unsorted integers
+"""
+
 
 def find_peak(list_of_integers):
-    if not list_of_integers:
+    """Find peak in unsorted list
+    """
+    loi = list_of_integers
+    size = len(loi)
+
+    if size == 0:
         return None
-    if len(list_of_integers) == 1:
-        return list_of_integers[0]
-    mid = len(list_of_integers) // 2
-    if list_of_integers[mid] > list_of_integers[mid - 1] and list_of_integers[mid] > list_of_integers[mid + 1]:
-        return list_of_integers[mid]
-    elif list_of_integers[mid] < list_of_integers[mid - 1]:
-        return find_peak(list_of_integers[:mid])
-    else:
-        return find_peak(list_of_integers[mid + 1:])
+
+    if size == 1:
+        return loi[0]
+
+    return recurse(loi, 0, size - 1)
 
 
+def recurse(loi, left, right):
+    """Recursive component
+    """
+    mid = int((left + right) / 2)
+
+    if left > right:
+        return loi[mid]
+
+    if (mid == 0 or loi[mid] > loi[mid - 1])\
+       and (mid == len(loi) - 1 or loi[mid] > loi[mid + 1]):
+        return loi[mid]
+
+    # recurse left
+    elif (mid > 0) and loi[mid - 1] > loi[mid]:
+        return recurse(loi, left, mid - 1)
+    else:  # recurse right
+        return recurse(loi, mid + 1, right)
